@@ -1,0 +1,94 @@
+<div class="grid">
+	<div class="col-1"></div>
+	<div class="col-10 mt-1">
+		<p-card>
+			<p-table responsiveLayout="scroll" [rowHover]="true" #dt [value]="serviceSpec" dataKey="id" [rows]="4"
+				[showCurrentPageReport]="true" [rowsPerPageOptions]="[4, 10, 15]" [loading]="loading"
+				styleClass="p-datatable-customers p-datatable-gridlines p-datatable-sm" [paginator]="true"
+				currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [globalFilterFields]="[
+          'methodName',
+          'inputParameter',
+          'exampleResponse',
+          'detail'
+        ]">
+				<ng-template pTemplate="caption">
+					<div class="flex justify-content-between">
+						<span> SERVICE-SPEC</span>
+						<span class="p-input-icon-left p-ml-auto">
+							<i class="pi pi-search"></i>
+							<input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')"
+								placeholder="Search keyword" />
+						</span>
+					</div>
+				</ng-template>
+				<ng-template pTemplate="header">
+					<tr>
+						<th>Method Name</th>
+						<th>Input Parameter</th>
+						<th>Example Picture</th>
+						<th>Example Response</th>
+						<th>Detail</th>
+						<th style="width: 7rem"></th>
+					</tr>
+					<tr>
+						<th>
+							<p-columnFilter type="text" field="methodName"></p-columnFilter>
+						</th>
+						<th>
+							<p-columnFilter type="text" field="inputParameter"></p-columnFilter>
+						</th>
+						<th>
+							<p-columnFilter type="text" field="exampleResponse"></p-columnFilter>
+						</th>
+						<th>
+							<p-columnFilter type="text" field="examplePicture"></p-columnFilter>
+						</th>
+						<th>
+							<p-columnFilter type="text" field="detail"></p-columnFilter>
+						</th>
+						<th></th>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="body" let-customer>
+					<tr>
+						<td>
+							{{ customer.methodName }}
+						</td>
+						<td>
+							{{ customer.inputParameter }}
+						</td>
+						<td *ngIf="customer.examplePicture">
+							<p-image src="api/pageimages/image/{{ customer.examplePicture }}" width="50" height="50"
+								[preview]="true">
+							</p-image>
+						</td>
+						<td *ngIf="!customer.examplePicture">
+							<p-image src="assets/no-image.png" width="40" height="50">
+							</p-image>
+						</td>
+						<td>
+							{{ customer.exampleResponse }}
+						</td>
+						<td>
+							{{ customer.detail }}
+						</td>
+						<td>
+							<button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-1"
+								(click)="gotoEdit(customer.serviceId)"></button>
+							<button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+								(click)="delete(customer.serviceId)"></button>
+						</td>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="emptymessage">
+					<tr>
+						<td colspan="5">No customers found.</td>
+					</tr>
+				</ng-template>
+			</p-table>
+		</p-card>
+		<button pButton pRipple type="button" label="NEW" icon="pi pi-plus"
+			class="p-button-outlined p-button-rounded p-button-danger p-button-sm mt-3" (click)="gotoSave()"></button>
+	</div>
+	<div class="col-1"></div>
+</div>

@@ -1,0 +1,342 @@
+<!-- <p-table  styleClass="p-datatable-gridlines" responsiveLayout="scroll" *ngFor="let item of newItems | keyvalue">
+  <ng-template pTemplate="caption" id="{{item.key}}">
+      {{item.key}}
+  </ng-template>
+  <ng-template pTemplate="header">
+      <tr>
+          <th>Label</th>
+          <th>Attribure</th>
+          <th>FormType</th>
+          <th>Detail</th>
+          <th>Event</th>
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="body" class="item" *ngFor="let value of item.value">
+  <tr>
+    <td>{{value.label}}</td>
+    <td>{{value.attribure}}</td>
+    <td>{{value.formType.formtypeName}}</td>
+    <td>{{value.detail}}</td>
+    <td>{{value.event}}</td>
+  </tr>
+  </ng-template>
+</p-table>
+
+<table *ngFor="let item of newItems | keyvalue">
+    {{item.key}}
+    <div class="item" *ngFor="let value of item.value">
+      <div>{{value.label}}</div>
+      <div>{{value.attribure}}</div>
+      <br>
+    </div>
+
+</table> -->
+
+<!-- <p-table [value]="filtterUiSpecs" sortField="pageimage.pageImageName" sortMode="single"
+      dataKey="pageimage.pageImageName" rowGroupMode="subheader" groupRowsBy="pageimage.pageImageName"
+      responsiveLayout="scroll" >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Label</th>
+          <th>Attribure</th>
+          <th>FormType</th>
+          <th>Detail</th>
+          <th>Event</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="groupheader" let-customer let-rowIndex="rowIndex" let-expanded="expanded">
+        <tr>
+          <td colspan="5">
+            <button type="button" pButton pRipple [pRowToggler]="customer" 
+              class="p-button-text p-button-rounded p-button-plain mr-2"
+              [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+            <p-image class="flex justify-content-center mb-3" src="api/pageimages/image/{{ customer.pageimage.picture }}" height="400"width="800" [preview]="true"
+              ></p-image><br>
+            <span class="font-bold ml-2">{{customer.pageimage.pageImageName}}</span>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="groupfooter" let-customer>
+        <tr class="p-rowgroup-footer">
+          <td colspan="4" style="text-align: right">Total Specs</td>
+          <td>{{calculateSpecTotal(customer.pageimage.pageImageName)}}</td>
+        </tr>
+      </ng-template>
+    
+      <ng-template pTemplate="body" let-customer>
+        <tr>
+          <td>
+            {{customer.label}}
+          </td>
+          <td>
+            {{customer.attribure}}
+          </td>
+          <td>
+            {{customer.formType.formtypeName}}
+          </td>
+          <td >
+            {{customer.detail}}
+          </td>
+          <td>
+            {{customer.event}}
+          </td>
+        </tr>
+      </ng-template>
+      
+    </p-table> -->
+
+<!-- <button (click)="downloadDocx()">"Word"</button>
+<button (click)="test()">"Log"</button> -->
+<!-- <button (click)="testClick()">ddddd</button> -->
+
+<div class="grid mt-1">
+  <div class="col-1"></div>
+  <div class="col-10">
+    <p-tabView>
+      <p-tabPanel header="PROGRAM SPEC">
+        <div class="grid">
+          <div class="col-1"></div>
+          <div class="col-10 mt-3">
+            <p-card id="htmlData">
+              <p-table [value]="filtterUiSpecs" sortField="pageimage.pageImageName"
+                styleClass=" p-datatable-sm p-datatable-gridlines" sortMode="single" dataKey="pageimage.pageImageName"
+                rowGroupMode="subheader" groupRowsBy="pageimage.pageImageName" responsiveLayout="scroll">
+                <ng-template pTemplate="header"> </ng-template>
+                <ng-template pTemplate="groupheader" let-customer>
+                  <tr>
+                    <td colspan="5">
+                      <div class="grid">
+                        <div class="col">
+                          <img src="assets/cdg_newlogo_2018.png" height="40" />
+                        </div>
+                        <div class="col flex justify-content-center font-bold border-round m-2">
+                          PROGRAM SPECIFICATION
+                        </div>
+                        <div class="col"></div>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr class="text-xs">
+                    <td colspan="2">PROJECT TITLE : {{ this.projectName }}</td>
+                    <td colspan="2">SYSTEM NAME : {{ this.systemName }}</td>
+                    <td>STATUS : {{ this.statusName }}</td>
+                  </tr>
+
+                  <tr class="text-xs">
+                    <td colspan="2">PROGRAM NAME : {{ this.programName }}</td>
+                    <td colspan="3">
+                      SYSTEM ANALYST : {{ this.systemAnalyst }}
+                    </td>
+                  </tr>
+
+                  <br />
+                  <tr class="font-bold bg-gray-100" colspan="5">
+                    <td style="min-width: 120px">Label</td>
+                    <td style="min-width: 125px">Attribure</td>
+                    <td style="min-width: 125px">FormType</td>
+                    <td style="min-width: 113px">Detail</td>
+                    <td style="min-width: 112px">Event</td>
+                  </tr>
+
+                  <tr>
+                    <td colspan="5">
+                      <div class="flex justify-content-center flex-wrap">
+                        <img class="border-solid h-20rem w-30rem" src="api/pageimages/image/{{
+                            customer.pageimage.picture
+                          }}" />
+                      </div>
+
+                      <br />
+                      <span class="font-bold ml-2">Page : {{ customer.pageimage.pageImageName }}</span>
+                    </td>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="groupfooter" let-customer>
+                  <tr class="p-rowgroup-footer">
+                    <td colspan="4" style="text-align: right">Total Specs</td>
+                    <td>
+                      {{ calculateSpecTotal(customer.pageimage.pageImageName) }}
+                    </td>
+                  </tr>
+                  <div class="page-break"></div>
+                </ng-template>
+
+                <ng-template pTemplate="body" let-customer let-rowIndex="rowIndex">
+                  <tr class="text-sm">
+                    <td>
+                      {{ customer.label }}
+                    </td>
+                    <td>
+                      {{ customer.attribure }}
+                    </td>
+                    <td>
+                      {{ customer.formType.formtypeName }}
+                    </td>
+                    <td *ngIf="customer.detail === 'Default'">
+                      {{ customer.detail }}
+                    </td>
+                    <td class="font-bold ml-2 text-blue-500" *ngIf="customer.detail !== 'Default'">
+                      <a href="http://localhost:4200/pdf#detail{{ customer.uispecId}}">Detail{{customer.uispecId}}</a>                
+                    </td>
+                    <td *ngIf="customer.event === 'None'">
+                      {{ customer.event }}
+                    </td>
+                    <td class="font-bold ml-2 text-blue-500" *ngIf="customer.event !== 'None'">
+                      <a href="http://localhost:4200/pdf#action{{ customer.uispecId}}">{{ this.action }}{{customer.uispecId}}</a> 
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table>
+
+              <p-table [value]="filtterUiSpecs" styleClass="p-datatable-gridlines p-datatable-sm">
+                <ng-template pTemplate="header"> 
+
+                </ng-template>
+                <ng-template pTemplate="body" let-spec let-rowIndex="rowIndex">
+                  <tr *ngIf="rowIndex == 0">
+                    <td colspan="5">
+                      <div class="grid">
+                        <div class="col">
+                          <img src="assets/cdg_newlogo_2018.png" height="40" />
+                        </div>
+                        <div class="col flex justify-content-center font-bold border-round m-2">
+                          PROGRAM SPECIFICATION
+                        </div>
+                        <div class="col"></div>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr class="text-xs" *ngIf="rowIndex == 0">
+                    <td colspan="2">PROJECT TITLE : {{ this.projectName }}</td>
+                    <td colspan="2">SYSTEM NAME : {{ this.systemName }}</td>
+                    <td>STATUS : {{ this.statusName }}</td>
+                  </tr>
+
+                  <tr class="text-xs" *ngIf="rowIndex == 0">
+                    <td colspan="2">PROGRAM NAME : {{ this.programName }}</td>
+                    <td colspan="3">SYSTEM ANALYST : {{ this.systemAnalyst }}</td>
+                  </tr>
+                  <br />
+                  <tr class="font-bold bg-gray-100" *ngIf="rowIndex == 0">
+                    <td colspan="1" style="width: 220px">Action</td>
+                    <td colspan="4" style="width: 375px">Description</td>
+                  </tr>
+
+                  <tr class="text-sm" *ngFor="let item of filtterUiSpecs">
+                    <td id ="detail{{item.uispecId}}" colspan="1" *ngIf="item.detail != 'Default' && rowIndex == 0"
+                      class="vertical-align-top font-bold text-blue-500" style="width: 220px">
+                      Detail{{item.uispecId}}
+                    </td>
+                    <td [innerHTML]="item.detail" colspan="4" *ngIf="item.detail != 'Default' && rowIndex == 0" colspan="4" style="width: 375px">
+                    </td>
+                  </tr>
+
+                  <tr class="text-sm" *ngFor="let item of filtterUiSpecs">
+                    <td id ="action{{item.uispecId}}" colspan="1" *ngIf="item.event != 'None' && rowIndex == 0"
+                      class="vertical-align-top font-bold text-blue-500 mt-0" style="width: 220px">
+                      Action{{item.uispecId}}
+                    </td>
+                    <td [innerHTML]="item.event" colspan="4" *ngIf="item.event != 'None' && rowIndex == 0" colspan="4" style="width: 375px">
+                    </td>
+                  </tr>
+                  <!-- <div class="page-break2"></div> -->
+                </ng-template>
+              </p-table>
+            </p-card>
+            <div class="col-md-4 text-right mt-3">
+              <button pButton pRipple icon="pi pi-download" label="Download PDF"
+                class="p-button-rounded p-button-danger" (click)="downloadProgram()"></button>
+            </div>
+          </div>
+          <div class="col-1"></div>
+        </div>
+      </p-tabPanel>
+      <p-tabPanel header="SERVICE SPEC">
+        <div class="grid mt-1">
+          <div class="col-1"></div>
+          <div class="col-10">
+            <p-card id="htmlDataService">
+              <p-table [value]="filtterServiceSpecs" styleClass="p-datatable-gridlines p-datatable-sm">
+                <ng-template pTemplate="header">
+                </ng-template>
+                <ng-template pTemplate="body" let-spec let-rowIndex="rowIndex">
+                  <tr>
+                    <td colspan="4">
+                      <div class="grid">
+                        <div class="col">
+                          <img src="assets/cdg_newlogo_2018.png" height="40" />
+                        </div>
+                        <div class="col flex justify-content-center font-bold border-round m-2">
+                          SERVICE SPECIFICATION
+                        </div>
+                        <div class="col"></div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="4">
+                      <div class="col flex justify-content-center font-bold">
+                        Service {{ rowIndex + 1 }}
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td class="vertical-align-top font-bold bg-gray-50" style="width: 200px">
+                      methodName
+                    </td>
+                    <td colspan="3" style="width: 395px">
+                      {{ spec.methodName }}
+                    </td>
+                  </tr>
+                  <tr *ngIf="spec.inputParameter">
+                    <td class="vertical-align-top font-bold bg-gray-50" style="width: 200px">
+                      Input Parameter
+                    </td>
+                    <td colspan="3" style="width: 395px"
+                    [innerHTML]="spec.inputParameter">
+                    </td>
+                  </tr>
+
+                  <tr *ngIf="spec.exampleResponse">
+                    <td class="vertical-align-top font-bold bg-gray-50" style="width: 200px">
+                      Example response
+                    </td>
+                    <td colspan="3" style="width: 395px" [innerHTML]="spec.exampleResponse"></td>
+                  </tr>
+
+                  <tr *ngIf="spec.examplePicture">
+                    <td class="vertical-align-top font-bold bg-gray-50" style="width: 200px">
+                      Example picture
+                    </td>
+
+                    <td colspan="3" style="width: 395px">
+                      <img class="border-solid h-14rem w-22rem" src="api/pageimages/image/{{ spec.examplePicture }}" />
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <!-- <td class="vertical-align-top font-bold bg-gray-50" style="width: 200px">
+                      Detail
+                    </td> -->
+                    <td colspan="5" style="width: 395px" [innerHTML]="spec.detail"></td>
+                  </tr>
+             
+                  <div *ngIf="rowIndex <= this.serviceSpecLength" class="page-break"></div>
+                </ng-template>
+              </p-table>
+            </p-card>
+            <div class="col-md-4 text-right mt-3">
+              <button pButton pRipple icon="pi pi-download" label="Download PDF"
+                class="p-button-rounded p-button-danger" (click)="downloadService()"></button>
+            </div>
+          </div>
+          <div class="col-1"></div>
+        </div>
+      </p-tabPanel>
+    </p-tabView>
+  </div>
+  <div class="col-1"></div>
+</div>

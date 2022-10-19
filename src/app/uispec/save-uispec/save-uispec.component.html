@@ -1,0 +1,100 @@
+<div class="grid">
+  <div class="col-1"></div>
+  <div class="col-10">
+    <div class="card">
+      <div class="flex flex-column card-container green-container">
+        <div
+          class="flex align-items-center justify-content-center h-6rem bg-pink-400 font-bold text-white border-round m-1 text-2xl my-1">
+          UI-SPEC
+        </div>
+      </div>
+    </div>
+
+    <p-image *ngIf="this.getImage" class="flex justify-content-center mb-3"
+      src="api/pageimages/image/{{ this.getImage }}" width="800" height="400" [preview]="true">
+    </p-image>
+
+    <p-panel header="NEW UI-SPEC">
+      <form [formGroup]="uispecSaveForm">
+        <div class="grid">
+          <div class="col-2">Label :</div>
+          <div class="col-4">
+            <input type="text" placeholder="InputText" pInputText formControlName="label" />
+            <small *ngIf="uispecSaveForm.get('label')?.invalid" class="p-error block">
+              <em class="pi pi-times-circle"></em> Please Enter Label
+            </small>
+          </div>
+          <div class="col-2">Attribure :</div>
+          <div class="col-4">
+            <input type="text" placeholder="InputText" pInputText formControlName="attribure" />
+            <small *ngIf="uispecSaveForm.get('attribure')?.invalid" class="p-error block">
+              <em class="pi pi-times-circle"></em> Please Enter Attribure
+            </small>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="col-2">FormType :</div>
+          <div class="col-4">
+            <p-dropdown placeholder="Select a FormType" [options]="formType" formControlName="formType"
+              optionLabel="formtypeName">
+            </p-dropdown>
+            <small *ngIf="uispecSaveForm.get('formType')?.invalid" class="p-error block">
+              <em class="pi pi-times-circle"></em> Please Select FormType
+            </small>
+          </div>
+          <div class="col-2">PageImage Name :</div>
+          <div class="col-4">
+            <p-dropdown placeholder="Select a PageImage" [options]="pageImage" formControlName="pageimage"
+              optionLabel="pageImageName" (onChange)="getImageName()">
+            </p-dropdown>
+            <small *ngIf="uispecSaveForm.get('pageimage')?.invalid" class="p-error block">
+              <em class="pi pi-times-circle"></em> Please Select PageImage Name
+            </small>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="col-2">Detail :</div>
+          <div class="col-4">
+            <textarea [rows]="5" [cols]="40" placeholder="รายละเอียดของ FormType&#10;1.&#10;2.&#10;3.&#10;..." pInputTextarea [autoResize]="true" formControlName="detail"></textarea>
+            <small *ngIf="uispecSaveForm.get('detail')?.invalid" class="p-error block">
+              <em class="pi pi-times-circle"></em> Please Enter Detail
+            </small>
+          </div>
+
+          <div class="col-2">Event :</div>
+          <div class="col-4">
+            <textarea [rows]="5" [cols]="40" placeholder="เมื่อกดปุ่ม...&#10;1.&#10;2.&#10;3.&#10;..." pInputTextarea [autoResize]="true" formControlName="event"></textarea>
+            <small *ngIf="uispecSaveForm.get('event')?.invalid" class="p-error block">
+              <em class="pi pi-times-circle"></em> Please Enter Event
+            </small>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="col-2">Service :</div>
+          <div class="col-4">
+            <p-dropdown placeholder="Select a Service" [options]="serviceSpecs" formControlName="service"
+              optionLabel="methodName">
+            </p-dropdown>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="col-1 col-offset-5">
+            <button pButton pRipple type="button" label="Save" (click)="addUISpec()"></button>
+          </div>
+          <div class="col-1">
+            <button pButton pRipple type="button" label="Reset" class="p-button-secondary" (click)="reset()"></button>
+          </div>
+        </div>
+      </form>
+    </p-panel>
+    <div class="col-10 mt-2">
+      <button pButton pRipple type="button" label="SEARCH" icon="pi pi-search"
+      class="p-button-outlined p-button-rounded p-button-danger p-button-sm" (click)="gotoSearch()"></button>
+    </div>
+  </div>
+  <div class="col-1"></div>
+</div>

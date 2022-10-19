@@ -1,0 +1,102 @@
+<div class="grid">
+  <div class="col-1"></div>
+  <div class="col-10">
+    <div class="card">
+      <div class="flex flex-column card-container green-container">
+        <div
+          class="flex align-items-center justify-content-center h-6rem bg-indigo-500 font-bold text-white border-round m-1 text-2xl my-1"
+        >
+          PROGRAM
+        </div>
+      </div>
+    </div>
+    <p-panel header="NEW PROGRAM">
+      <form [formGroup]="programSaveForm">
+        <div class="grid">
+          <div class="col-2">Program Name :</div>
+          <div class="col-4">
+            <input type="text" placeholder="InputText" pInputText formControlName="programName" />
+            <small *ngIf="programSaveForm.get('programName')?.invalid" class="p-error block">
+              <em class="pi pi-times-circle"></em> Please Enter Program Name
+            </small>
+          </div>
+          <div class="col-2">Project :</div>
+          <div class="col-4">
+            <p-dropdown
+              placeholder="Select a Project"
+              [options]="project"
+              formControlName="project"
+              optionLabel="projectName"
+            >
+            </p-dropdown>
+            <small *ngIf="programSaveForm.get('project')?.invalid" class="p-error block">
+              <em class="pi pi-times-circle"></em> Please Select Project
+            </small>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="col-2">System :</div>
+          <div class="col-4">
+            <p-dropdown
+              placeholder="Select a System"
+              [options]="system"
+              formControlName="system"
+              optionLabel="systemName"
+            >
+            </p-dropdown>
+            <small *ngIf="programSaveForm.get('system')?.invalid" class="p-error block">
+              <em class="pi pi-times-circle"></em> Please Select System
+            </small>
+          </div>
+          <div class="col-2">System Analyst :</div>
+          <div class="col-4">
+            <p-dropdown
+              placeholder="Select a System Analyst"
+              [options]="systemAnalyst"
+              formControlName="systemAnalyst"
+              optionLabel="systemAnalystName"
+            >
+            </p-dropdown>
+            <small *ngIf="programSaveForm.get('systemAnalyst')?.invalid" class="p-error block">
+              <em class="pi pi-times-circle"></em> Please Select System Analyst
+            </small>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="col-2">Status :</div>
+          <div class="col-4">
+            <p-dropdown
+              placeholder="Select a Status"
+              [options]="status"
+              formControlName="status"
+              optionLabel="statusName"
+            >
+            </p-dropdown>
+          </div>
+        </div>
+        <div class="grid">
+          <div class="col-1 col-offset-5">
+            <button pButton pRipple type="button" label="Save" (click)="addProgram()"></button>
+          </div>
+          <div class="col-1">
+            <button
+              pButton
+              pRipple
+              type="button"
+              label="Reset"
+              class="p-button-secondary"
+              (click)="reset()"
+            ></button>
+          </div>
+        </div>
+      </form>
+    </p-panel>
+    <div class="col-10 mt-2">
+      <button pButton pRipple type="button" label="SEARCH" icon="pi pi-search"
+        class="p-button-outlined p-button-rounded p-button-danger p-button-sm" (click)="gotoSearch()"></button>
+    </div>
+  </div>
+  <div class="col-1"></div>
+</div>

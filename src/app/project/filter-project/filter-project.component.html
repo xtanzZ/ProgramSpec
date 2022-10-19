@@ -1,0 +1,56 @@
+<div class="grid">
+    <div class="col-1"></div>
+    <div class="col-10 mt-1">
+        <p-card>
+            <p-table responsiveLayout="scroll" [rowHover]="true" #dt [value]="project" dataKey="id" [rows]="4"
+                [showCurrentPageReport]="true" [rowsPerPageOptions]="[4, 10, 15]" [loading]="loading"
+                styleClass="p-datatable-customers p-datatable-gridlines p-datatable-sm" [paginator]="true"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [globalFilterFields]="[
+          'projectName',]">
+                <ng-template pTemplate="caption">
+                    <div class="flex justify-content-between">
+                        <span> PROJECT</span>
+                        <span class="p-input-icon-left p-ml-auto">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')"
+                                placeholder="Search keyword" />
+                        </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Project Name</th>
+                        <th style="width: 7rem"></th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <p-columnFilter type="text" field="projectName"></p-columnFilter>
+                        </th>
+                        <th></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-customer>
+                    <tr>
+                        <td>
+                            {{ customer.projectName }}
+                        </td>
+                        <td>
+                            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-1"
+                                (click)="gotoEdit(customer.projectId)"></button>
+                            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+                                (click)="delete(customer.projectId)"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="5">No customers found.</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </p-card>
+        <button pButton pRipple type="button" label="NEW" icon="pi pi-plus"
+            class="p-button-outlined p-button-rounded p-button-danger p-button-sm mt-3" (click)="gotoSave()"></button>
+    </div>
+    <div class="col-1"></div>
+</div>

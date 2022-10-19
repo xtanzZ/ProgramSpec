@@ -1,0 +1,120 @@
+<div class="grid">
+  <div class="col-1"></div>
+  <div class="col-10">
+    <div class="card">
+      <div class="flex flex-column card-container green-container">
+        <div
+          class="flex align-items-center justify-content-center h-6rem bg-purple-600 font-bold text-white border-round m-1 text-2xl my-1">
+          PAGEIMAGE
+        </div>
+      </div>
+    </div>
+    <p-panel header="NEW PAGEIMAGE">
+      <form [formGroup]="pageImageAddForm">
+        <div class="grid">
+          <div class="col-2">PageImage Name :</div>
+          <div class="col-4">
+            <input type="text" placeholder="InputText" pInputText formControlName="pageImageName" />
+            <small *ngIf="pageImageAddForm.get('pageImageName')?.invalid" class="p-error block">
+              <em class="pi pi-times-circle"></em> Please Enter PageImage Name
+            </small>
+          </div>
+          <div class="col-2">Program Name :</div>
+          <div class="col-4">
+            <p-dropdown placeholder="Select a Program" [options]="programs" formControlName="program"
+              optionLabel="programName">
+            </p-dropdown>
+            <small *ngIf="pageImageAddForm.get('program')?.invalid" class="p-error block">
+              <em class="pi pi-times-circle"></em> Please Select Program
+            </small>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="col-2">Picture :</div>
+          <div class="col-4">
+            <input #inputFile type="file" accept="image/*" (change)="getFile($event)" class="custom-file-input" />
+            <small *ngIf="!result" class="p-error block">
+              <em class="pi pi-times-circle"></em> Please Select Picture
+            </small>
+            <br>
+            <span [innerHTML]="result"></span>
+          </div>
+
+          <div class="col-2" *ngIf="showPicture">Current Picture :</div>
+          <div class="col-4"*ngIf="showPicture">
+            <p-image src="api/pageimages/image/{{ showPicture }}" width="100" height="100" [preview]="true"></p-image>
+          </div>
+
+        </div>
+
+
+        <!-- <div class="grid" *ngIf="showButton">
+          <div class="col-2"></div>
+          <div class="col-4">
+            <img src="api/pageimages/image/{{ showPicture }}" width="100" height="100">
+          </div>
+          
+        </div> -->
+
+
+        <div class="grid">
+          <div class="col-1 col-offset-5">
+            <button pButton pRipple type="button" label="Save" (click)="addPageImage()"></button>
+          </div>
+          <div class="col-1">
+            <button pButton pRipple type="button" label="Reset" (click)="reset()" class="p-button-secondary"></button>
+          </div>
+        </div>
+      </form>
+    </p-panel>
+    <div class="col-10 mt-2">
+      <button pButton pRipple type="button" label="SEARCH" icon="pi pi-search"
+      class="p-button-outlined p-button-rounded p-button-danger p-button-sm" (click)="gotoSearch()"></button>
+    </div>
+  </div>
+  <div class="col-1"></div>
+</div>
+
+<!-- <p-panel header="ADD COMPONENT">
+  <form [formGroup]="pageImageAddForm">
+
+  
+  <div class="grid">
+    <div class="col">
+      <label>เพิ่มรูปภาพ</label>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="col">
+      <input type="file" (change)="getFile($event)" formControlName="picture"/>
+        
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="col-2">ชื่อคอมโพแนนซ์ :</div>
+    <div class="col-4">
+      <input type="text" pInputText formControlName="componentName"/>
+    </div>
+    <div class="col-2">ชื่อโครงการ :</div>
+    <div class="col-4">
+      <p-dropdown  [options]="programs" formControlName="project" optionLabel="projectName">
+      </p-dropdown>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="col-1 col-offset-5">
+      <button pButton type="button" label="save" (click)="upload()" (click)="saveComponents()"></button>
+    </div>
+    <div class="col-1">
+      <button pButton type="button" label="cancel"></button>
+    </div>
+  </div>
+</form>
+</p-panel>
+
+
+
+   -->

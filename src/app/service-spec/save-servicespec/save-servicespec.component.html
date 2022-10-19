@@ -1,0 +1,65 @@
+<div class="grid">
+    <div class="col-1"></div>
+    <div class="col-10 mt-4">
+        <p-panel header="New ServiceSpec">
+            <form [formGroup]="serviceSpecAddForm">
+                <div class="grid">
+                    <div class="col-2">Method Name :</div>
+                    <div class="col-4">
+                        <input type="text" placeholder="InputText" pInputText formControlName="methodName" />
+                        <small *ngIf="serviceSpecAddForm.get('methodName')?.invalid" class="p-error block">
+                            <em class="pi pi-times-circle"></em> Please Enter Method Name
+                          </small>
+                    </div>
+                    <div class="col-2">Input Parameter :</div>
+                    <div class="col-4">
+                        <input type="text" placeholder="InputText" pInputText formControlName="inputParameter" />
+                    </div>
+                </div>
+
+                <div class="grid">
+                    <div class="col-2">Example Response :</div>
+                    <div class="col-4">
+                        <textarea [rows]="5" [cols]="40" placeholder="InputTextarea" pInputTextarea [autoResize]="true"formControlName="exampleResponse"></textarea>
+                    </div>
+                    
+                    <div class="col-2">Detail :</div>
+                    <div class="col-4">
+                        <textarea [rows]="5" [cols]="40" placeholder="InputTextarea" pInputTextarea [autoResize]="true"formControlName="detail"></textarea>
+                        <small *ngIf="serviceSpecAddForm.get('detail')?.invalid" class="p-error block">
+                            <em class="pi pi-times-circle"></em> Please Enter Detail
+                          </small>
+                    </div>
+                </div>
+
+                <div class="grid">
+                    <div class="col-2">Example Picture :</div>
+                    <div class="col-4" >
+                        <input #inputFile type="file" accept="image/*" (change)="getFile($event)" class="custom-file-input" />
+                        <br>
+                        <span *ngIf="result" [innerHTML]="result"></span>
+                    </div>
+
+                    <div class="col-2" *ngIf="showPicture">Current Example Picture :</div>
+                    <div class="col-4" *ngIf="showPicture">
+                        <p-image src="api/pageimages/image/{{ showPicture }}" width="100" height="100" [preview]="true">
+                        </p-image>
+                    </div>
+
+                </div>
+
+                <div class="grid">
+                    <div class="col-1 col-offset-5">
+                        <button pButton pRipple type="button" label="Save" (click)="addServiceSpec()"></button>
+                    </div>
+                    <div class="col-1">
+                        <button pButton pRipple type="button" label="Reset" (click)="reset()"class="p-button-secondary"></button>
+                    </div>
+                </div>
+            </form>
+        </p-panel>
+        <button pButton pRipple type="button" label="FILTER" icon="pi pi-filter"
+        class="p-button-outlined p-button-rounded p-button-danger p-button-sm mt-3" (click)="gotoFiltter()"></button>
+    </div>
+    <div class="col-1"></div>
+</div>

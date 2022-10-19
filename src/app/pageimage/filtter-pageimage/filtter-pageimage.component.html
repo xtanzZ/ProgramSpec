@@ -1,0 +1,80 @@
+<div class="grid">
+  <div class="col-1"></div>
+  <div class="col-10">
+    <div class="card">
+      <div class="flex flex-column card-container green-container">
+        <div
+          class="flex align-items-center justify-content-center h-6rem bg-purple-600 font-bold text-white border-round m-1 text-2xl my-1">
+          PAGEIMAGE
+        </div>
+      </div>
+    </div>
+    <div class="grid">
+      <div class="col-12">
+        <p-card>
+          <form [formGroup]="pageImageFiltterForm">
+            <div class="grid font-bold">
+              <div class="col-2">
+                <label>Program Name</label>
+                <p-autoComplete [dropdown]="true" [style]="{ width: '100%' }" [inputStyle]="{ width: '100%' }"
+                  formControlName="program" [suggestions]="fitterProgram" (completeMethod)="searchP($event)">
+                </p-autoComplete>
+              </div>
+
+              <div class="col-2 mt-4">
+                <button [style]="{ width: '60%' }" icon="pi pi-search" pButton type="button" label="Search"
+                  (click)="queryPageImages()"></button>
+                <button class="p-button-danger ml-2" [style]="{ width: '20%' }" icon="pi pi-times" pButton type="button"
+                  (click)="reset()"></button>
+              </div>
+              <div class="col-1"></div>
+              <div class="col-1"></div>
+            </div>
+          </form>
+
+          <p-table responsiveLayout="scroll" [rowHover]="true" [value]="pageImages" [rows]="4" [showCurrentPageReport]="true" [rowsPerPageOptions]="[4, 10, 15]"
+            [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            styleClass="p-datatable-sm p-datatable-gridlines">
+            <ng-template pTemplate="header">
+              <tr>
+                <th style="min-width: 200px">PageImage Name</th>
+                <th style="min-width: 200px">Picture</th>
+                <th style="min-width: 200px">Program Name</th>
+                <th style="min-width: 100px"></th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-pageimage>
+              <tr>
+                <td style="min-width: 200px">{{ pageimage.pageImageName }}</td>
+                <td style="min-width: 200px" *ngIf="pageimage.picture">
+                  <p-image src="api/pageimages/image/{{ pageimage.picture }}" width="70" height="70" [preview]="true">
+                  </p-image>
+                </td>
+                <td style="min-width: 200px" *ngIf="!pageimage.picture"></td>
+                <td style="min-width: 200px">{{ pageimage.program.programName }}</td>
+                <td class="flex-space-around">
+                  <button pButton pRipple icon="pi pi-plus" class="p-button-rounded mr-1"
+                    (click)="gotoUISpecSave(pageimage.pageImageId)"></button>
+                  <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-1"
+                    (click)="gotoEdit(pageimage.pageImageId)"></button>
+                  <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+                    (click)="delete(pageimage.pageImageId)"></button>
+                </td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+              <tr>
+                <td colspan="8" style="color: red">PageImage Not Found.</td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </p-card>
+      </div>
+    </div>
+    <div class="col-10">
+      <button pButton pRipple type="button" label="NEW" icon="pi pi-plus"
+        class="p-button-outlined p-button-rounded p-button-danger p-button-sm" (click)="gotoSave()"></button>
+    </div>
+  </div>
+  <div class="col-1"></div>
+</div>

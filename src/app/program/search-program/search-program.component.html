@@ -1,0 +1,102 @@
+<div class="grid">
+  <div class="col-1"></div>
+  <div class="col-10">
+    <div class="card">
+      <div class="flex flex-column card-container green-container">
+        <div
+          class="flex align-items-center justify-content-center h-6rem bg-indigo-500 font-bold text-white border-round m-1 text-2xl my-1">
+          PROGRAM
+        </div>
+      </div>
+    </div>
+    <div class="grid mt-1">
+
+      <div class="col-12">
+        <p-card>
+          <form [formGroup]="projectSearchForm">
+            <div class="grid font-bold">
+              <div class="col-2"> <label>Program</label>
+                <p-autoComplete [dropdown]="true" [style]="{ width: '100%' }" [inputStyle]="{ width: '100%' }"
+                  formControlName="program" [suggestions]="fitterProgram" (completeMethod)="searchP($event)">
+                </p-autoComplete>
+              </div>
+              <div class="col-2"> <label>System Analyst</label>
+                <p-autoComplete [dropdown]="true" [style]="{ width: '100%' }" [inputStyle]="{ width: '100%' }"
+                  formControlName="employeeName" [suggestions]="fitterSystemAnalyst"
+                  (completeMethod)="searchSD($event)">
+                </p-autoComplete>
+              </div>
+              <div class="col-2"><label>Status</label>
+                <p-dropdown [style]="{ width: '100%' }" placeholder="Select a Status" [options]="status"
+                  formControlName="status" optionLabel="statusName">
+                </p-dropdown>
+              </div>
+              <div class="col-2 mt-4">
+                <button [style]="{ width: '60%' }" icon="pi pi-search" pButton type="button" label="Search"
+                  (click)="queryProjects()"></button>
+                <button class="p-button-danger ml-2" [style]="{ width: '20%' }" icon="pi pi-times" pButton type="button"
+                  (click)="reset()"></button>
+              </div>
+              <div class="col-1">
+              </div>
+              <div class="col-1"></div>
+            </div>
+          </form>
+
+          <p-table responsiveLayout="scroll" [rowHover]="true" [value]="projects" [rows]="4" [showCurrentPageReport]="true" [rowsPerPageOptions]="[4,10,15]"
+            [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            styleClass="p-datatable-gridlines p-datatable-sm">
+            <ng-template pTemplate="header">
+              <tr>
+                <th>Project Name</th>
+                <th>Program Name</th>
+                <th>System Name</th>
+                <th>System Analyst Name</th>
+                <th>Status</th>
+                <th style="width: 20%"></th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-project>
+              <tr>
+                <td>{{ project.project.projectName }}</td>
+                <td>{{ project.programName }}</td>
+                <td>{{ project.system.systemName }}</td>
+                <td>
+                  {{ project.systemAnalyst.systemAnalystName }}
+                </td>
+                <td>
+                  <p-tag
+                    [severity]="project.status.statusName  == 'Create' ? 'success' : project.status.statusName  == 'Publish' ? 'info' : project.status.statusName  == 'Checkout' ? 'warning' : 'danger'"
+                    [value]="project.status.statusName "></p-tag>
+                </td>
+                <td>
+                  <button pButton pRipple icon="pi pi-plus" class="p-button-rounded mr-1"
+                    (click)="gotoPageImageSave(project.programId)"></button>
+                  <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-1"
+                    (click)="gotoEdit(project.programId)"></button>
+                  <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning mr-1"
+                    (click)="delete(project.programId)"></button>
+                  <button pButton pRipple icon="pi pi-file-pdf" class="p-button-rounded p-button-danger mr-1"
+                    (click)="gotoPDF(project.programId)"></button>
+                  <button pButton pRipple icon="pi pi-copy" class="p-button-rounded p-button-secondary"
+                    (click)="copyProgram(project.programId)"></button>
+
+                </td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+              <tr>
+                <td colspan="8" style="color: red">Program Not Found.</td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </p-card>
+      </div>
+    </div>
+    <div class="col-10">
+      <button pButton pRipple type="button" label="NEW" icon="pi pi-plus"
+        class="p-button-outlined p-button-rounded p-button-danger p-button-sm" (click)="gotoSave()"></button>
+    </div>
+  </div>
+  <div class="col-1"></div>
+</div>

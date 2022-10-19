@@ -1,0 +1,30 @@
+<div class="grid">
+    <div class="col-1"></div>
+    <div class="col-10 mt-4">
+        <p-panel header="New Project">
+            <form [formGroup]="projectAddForm">
+                <div class="grid">
+                    <div class="col-2">Project Name :</div>
+                    <div class="col-4">
+                        <input type="text" placeholder="InputText" pInputText formControlName="projectName" />
+                        <small *ngIf="projectAddForm.get('projectName')?.invalid" class="p-error block">
+                            <em class="pi pi-times-circle"></em> Please Enter Project Name
+                          </small>
+                    </div>
+                </div>
+
+                <div class="grid">
+                    <div class="col-1 col-offset-5">
+                        <button pButton pRipple type="button" label="Save" (click)="addProject()"></button>
+                    </div>
+                    <div class="col-1">
+                        <button pButton pRipple type="button" label="Reset" (click)="reset()"class="p-button-secondary"></button>
+                    </div>
+                </div>
+            </form>
+        </p-panel>
+        <button pButton pRipple type="button" label="FILTER" icon="pi pi-filter"
+        class="p-button-outlined p-button-rounded p-button-danger p-button-sm mt-3" (click)="gotoFiltter()"></button>
+    </div>
+    <div class="col-1"></div>
+</div>
