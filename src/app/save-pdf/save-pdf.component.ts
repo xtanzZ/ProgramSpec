@@ -189,45 +189,6 @@ export class SavePdfComponent implements OnInit {
     });
   }
 
-
-  test() {
-    // https://docx.js.org/#/?id=welcome
-    // https://stackblitz.com/edit/angular-docx?file=src%2Fapp%2Fcv-generator.ts
-    console.log("uispec" + JSON.stringify(this.filtterUiSpecs))
-  }
-
-
-
-  // @ViewChild('htmlData') htmlData: ElementRef | undefined;
-  // openPDF(): void {
-  //   let DATA: any = document.getElementById('htmlData');
-  //   html2canvas(DATA).then((canvas) => {
-  //     let fileWidth = 210;
-  //     let pageHeight = 297;
-  //     let fileHeight = (canvas.height * fileWidth) / canvas.width;
-  //     let heightLeft = fileHeight;
-  //     const FILEURI = canvas.toDataURL('image/png');
-  //     let PDF = new jsPDF('p', 'mm', 'a4');
-  //     let position = 10;
-  //     PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
-  //     console.log("fileHeight :" + fileHeight)
-  //     console.log("Position :" + position)
-  //     heightLeft -= pageHeight;
-
-  //     while (heightLeft >= 0) {
-  //       position += heightLeft - fileHeight; // top padding for other pages
-  //       PDF.addPage();
-  //       PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
-  //       console.log("fileHeight1 :" + fileHeight)
-  //       console.log("Position1 :" + position)
-  //       console.log("file 2" + fileHeight)
-  //       heightLeft -= pageHeight;
-  //     }
-  //     PDF.save('angular-demo.docx');
-
-  //   });
-  // }
-
   checkTable(detail: string) {
     if (detail == "Default") {
       this.detail = "Default"
